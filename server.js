@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors');  // CORS 패키지 추가
+const cors = require('cors');  // CORS 미들웨어 추가
 const http = require('http');
 const socketIo = require('socket.io');
 
@@ -7,9 +7,9 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// CORS 설정
+// CORS 설정: 최신 Netlify URL 추가
 app.use(cors({
-    origin: 'https://66dd766a4a655e7a7077348d--songjintest.netlify.app',  // 클라이언트 URL 허용
+    origin: '*',  // 모든 도메인에서 접근 허용
     methods: ['GET', 'POST'],
     credentials: true
 }));

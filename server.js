@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 // 위치 정보 받는 라우트
 app.post('/send-location', (req, res) => {
     const { lat, lon } = req.body;
+    console.log('Location data received:', lat, lon);  // 요청 데이터 출력
     if (lat && lon) {
         io.emit('notification', '출입 금지 구역에 진입했습니다!');
         res.status(200).send('Location received');

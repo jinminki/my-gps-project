@@ -1,0 +1,9 @@
+version: "1.0"
+app:
+  name: "gps-notification-system"  # 프로젝트 이름
+  project: "default"               # 기본값 사용
+  runtime: "node@16"               # Node.js 16 버전 사용
+build:
+  - npm ci                 # 의존성 설치 명령어
+  run:
+    command: "npm start"           # 서버 시작 명령어

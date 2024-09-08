@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: "https://66dd7a73aeaf64d7600baee9--songjintest.netlify.app",  // 최신 Netlify URL 추가
+        origin: "https://shiny-genie-6484c8.netlify.app",  // 최신 Netlify URL 추가
         methods: ["GET", "POST"],
         credentials: true
     }
@@ -15,7 +15,7 @@ const io = socketIo(server, {
 
 // CORS 설정
 app.use(cors({
-    origin: 'https://66dd7a73aeaf64d7600baee9--songjintest.netlify.app',  // Netlify URL로 변경
+    origin: 'https://shiny-genie-6484c8.netlify.app',  // Netlify URL로 변경
     methods: ['GET', 'POST'],
     credentials: true
 }));

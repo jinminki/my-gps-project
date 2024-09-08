@@ -23,6 +23,11 @@ app.use(cors({
 
 app.use(express.json());  // JSON 요청을 처리하기 위해 추가
 
+// 기본 경로 라우트 추가
+app.get('/', (req, res) => {
+    res.send('GPS Notification System Server is Running');
+});
+
 // 포트 설정 (기본값을 5000으로 변경)
 const port = process.env.PORT || 5000;
 

@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
-const pointInPolygon = require('point-in-polygon');  // 다각형 내 위치 확인용
 
 const app = express();
 const server = http.createServer(app);
@@ -32,11 +31,16 @@ app.post('/save-restricted-area', (req, res) => {
 
     if (coordinates && Array.isArray(coordinates)) {
         console.log('Received coordinates:', coordinates);
-        // 좌표를 처리하는 로직 (예: 데이터베이스에 저장)
+        // 좌표를 처리하는 로직 (예: 데이터베이스에 저장 가능)
         res.status(200).json({ message: 'Coordinates saved successfully' });
     } else {
         res.status(400).json({ message: 'Invalid coordinates' });
     }
+});
+
+// 기본 경로 라우트 (테스트 용도)
+app.get('/', (req, res) => {
+    res.send('GPS Notification System Server is Running');
 });
 
 // 서버 실행

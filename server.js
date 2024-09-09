@@ -23,7 +23,7 @@ app.use(cors({
 app.use(express.json());  // JSON 요청을 처리하기 위해 추가
 
 // 포트 설정 (환경 변수에서 가져오거나 기본 3000번 사용)
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 // 출입 금지 구역 좌표 저장을 위한 API 경로
 app.post('/save-restricted-area', (req, res) => {

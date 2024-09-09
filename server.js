@@ -60,3 +60,40 @@ app.post('/send-location', (req, res) => {
 server.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+const fs = require('fs');
+const path = require('path');
+
+// 구역 데이터를 저장할 파일 경로
+const dataFilePath = path.join(__dirname, 'zonesData.json');
+
+// 구역 데이터 저장 함수
+function saveZonesToFile(zones) {
+    fs.writeFileSync(dataFilePath, JSON.stringify(zones, null, 2));
+}
+
+// 구역 데이터 불러오기 함수
+function loadZonesFromFile() {
+    if (fs.existsSync(dataFilePath)) {
+        const data = fs.readFileSync(dataFilePath);
+        return JSON.parse(data);
+    }
+    return [];
+}
+
+app.post('/save-zone', (req, res) => {
+    const newZone = req.body;
+
+    // 기존 데이터를 불러온 후 새로운 데이터를 추가
+    const zones = loadZonesFromFile();
+    zones.push(newZone);
+    
+    // 데이터를 파일에 저장
+    saveZonesToFile(zones);
+
+    res.status(200).send('Zone data saved successfully');
+});
+
+app.get('/load-zones', (req, res) => {
+    const zones = loadZonesFromFile();
+    res.status(200).json(zones);
+});

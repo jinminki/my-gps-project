@@ -3,6 +3,8 @@ const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
 const pointInPolygon = require('point-in-polygon');  // 다각형 내 위치 확인용
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const server = http.createServer(app);
@@ -28,7 +30,7 @@ app.get('/', (req, res) => {
     res.send('GPS Notification System Server is Running');
 });
 
-// 포트 설정 (기본값을 5000으로 변경)
+// 포트 설정 (기본값을 5000으로 설정)
 const port = process.env.PORT || 5000;
 
 // 출입 금지 구역 좌표 설정
@@ -56,13 +58,6 @@ app.post('/send-location', (req, res) => {
     }
 });
 
-// 서버가 지정된 포트에서 실행
-server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
-const fs = require('fs');
-const path = require('path');
-
 // 구역 데이터를 저장할 파일 경로
 const dataFilePath = path.join(__dirname, 'zonesData.json');
 
@@ -80,6 +75,7 @@ function loadZonesFromFile() {
     return [];
 }
 
+// 구역 데이터를 저장하는 API
 app.post('/save-zone', (req, res) => {
     const newZone = req.body;
 
@@ -93,7 +89,13 @@ app.post('/save-zone', (req, res) => {
     res.status(200).send('Zone data saved successfully');
 });
 
+// 구역 데이터를 불러오는 API
 app.get('/load-zones', (req, res) => {
     const zones = loadZonesFromFile();
     res.status(200).json(zones);
+});
+
+// 서버가 지정된 포트에서 실행
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });

@@ -10,7 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: "https://songjintest.netlify.app", // Netlify에서 배포한 클라이언트 URL
+        origin: "https://son1122.netlify.app", // Netlify에서 배포한 클라이언트 URL
         methods: ["GET", "POST"],
         credentials: true
     }
@@ -18,7 +18,7 @@ const io = socketIo(server, {
 
 // CORS 설정
 app.use(cors({
-    origin: 'https://songjintest.netlify.app',
+    origin: 'https://son1122.netlify.app',
     methods: ['GET', 'POST'],
     credentials: true
 }));
